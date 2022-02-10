@@ -2,56 +2,78 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+
 let engine;
 let world;
-var bolada;
-var chao;
-var bolls;
-var cha
-
+var ball;
+var cube;
+var rentagulo;
+var ground;
+var angle=60;
+var poly;
 
 
 function setup() {
   createCanvas(400,400);
+  
+
   engine = Engine.create();
   world = engine.world;
-  var bolls_options={
-    restituntion:0.95
-    
-  }
-  var bolada_options={
-      restituntion:0.01,
-      frinction:1,
-      frinctionAir:0.3
-      
-  };
-  var chao_options ={
-    isStatic: true
-  };
-  var cha_options ={
-    isStatic: true
-  }
-  bolada=Bodies.circle(100,10,20,bolada_options);
-  World.add(world,bolada);
+  
+   var ball_options = {
+    restitution: 0.95,
+    frictionAir: 0.05
+   }
+   var cube_options = {
+     restitution: 0.25,
+     frictionAir: 0.001
+   }
+   var rentagulo_options = {
+     restitution: 0.65,
+     frictionAir: 0.05
+   }
+   
+   var ground_options ={
+     isStatic: true
+   };
+  
+  
 
-  bolls=Bodies.circle(250,10,20,bolls_options);
-  World.add(world,bolls);
+  ground = Bodies.rectangle(200,390,400,20,ground_options);
+  World.add(world,ground);
 
-  chao=Bodies.rectangle(200,390,400,20,chao_options);
-  World.add(world,chao);
+  ball = Bodies.circle(200,10,20,ball_options);
+  World.add(world,ball);
 
-  cha=Bodies.rectangle(300,200,200,20,cha_options);
-  World.add(world,cha)
-  rectMode(CENTER)
-  ellipseMode(RADIUS)
+  cube = Bodies.rectangle(100,10,40,40,cube_options)
+  World.add(world,cube)
+
+  rentagulo = Bodies.rectangle(350,5,80,40,rentagulo_options)
+  World.add(world,rentagulo)
+  
+  
+  
+
+  rectMode(CENTER);
+  ellipseMode(RADIUS);
 }
+
+
 function draw() 
 {
- background(51)
- Engine.update(engine)
- ellipse(bolada.position.x,bolada.position.y,20)
- ellipse(bolls.position.x,bolls.position.y,20)
- rect(chao.position.x,chao.position.y,400,20)
- rect(cha.position.x,cha.position.y,400,20)
+  background(51);
+  Engine.update(engine);
+  
+  
+  fill("SteelBlue")
+  ellipse(ball.position.x,ball.position.y,20);
+  rect(ground.position.x,ground.position.y,400,20);
+  rect(cube.position.x,cube.position.y,40,40)
+  rect(rentagulo.position.x,rentagulo.position.y,80,40)
+ 
+
+
+  
+  
 }
 
